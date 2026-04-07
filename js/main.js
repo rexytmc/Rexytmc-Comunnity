@@ -39,7 +39,7 @@
             likes: 0,
             imagePath: "assets/complementary",
             versions: ["r1.1", "1.21.1.1", "Android"],
-            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png"],
+            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
             exclusiveLink: null 
         },
         {
@@ -54,7 +54,22 @@
             likes: 0,
             imagePath: "assets/iterationt",
             versions: ["r1.1", "1.21.1.1", "Android"],
-            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png"],
+            screenshotFiles: [],
+            exclusiveLink: null 
+        },
+        {
+                    id: 4,
+            title: "Minecraft Bedrock",
+            author: "Mojang",
+            description: "Esta versión fue lanzada el 31 de Marzo de 2026. Se corrigieron varios errores que podían afectar la jugabilidad. Se solucionó un problema en Realms Stories donde la pestaña Miembros no se cargaba correctamente. Se solucionó un problema con la lista de permitidos para los servidores.",
+            features: [],
+            downloadLink: "https://link-hub.net/1317037/eLo0MR7eXlkg", 
+            youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
+            downloads: 0, 
+            likes: 0,
+            imagePath: "assets/minecraft",
+            versions: ["1.26.12", "32bits 64bits", "878.96 MB"],
+            screenshotFiles: [],
             exclusiveLink: null 
         }
     ]; 
@@ -219,10 +234,6 @@ const screenshotImages = generateScreenshotsAuto();
         // 2. Botones de Acción (Descarga y Exclusivo)
         document.getElementById('detailDownloadBtn').href = shader.downloadLink || '#';
         document.getElementById('detailDownloadBtn').onclick = () => trackDownload(shader.id, shader.downloadLink);
-
-        const exclusiveBtn = document.getElementById('detailExclusiveBtn');
-        const exclusiveLink = shader.exclusiveLink || GENERAL_DONATE_LINK;
-        exclusiveBtn.href = exclusiveLink;
         
         // 3. Contenido Principal (Portada)
         mainScreen.innerHTML = '';
