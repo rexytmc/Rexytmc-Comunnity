@@ -160,13 +160,7 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   display: block;
   object-fit: cover;
 }
-    .gallery-item p {
-      margin: 8px 0;
-      font-size: 13px;
-      color: #ccc;
-      text-align: center;
-      min-height: 1.2em; 
-    }
+    
     .gallery-item p:empty { display: none; }
 
 
@@ -625,3 +619,122 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
         z-index: 5;
         text-shadow: 0 0 3px #000; /* Sombra sutil para mejor contraste sobre la imagen */
     }
+    /* --------------------------------------------------
+   Modal de Screenshots
+-------------------------------------------------- */
+#screenshotModal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9); /* fondo oscuro semi-transparente */
+}
+
+#screenshotModal .close-modal-btn {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#screenshotModal .close-modal-btn:hover {
+  color: #bbb;
+}
+
+#screenshotModal .modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80%;
+  box-shadow: 0 0 15px #000;
+  border-radius: 10px;
+  animation: zoom 0.3s ease;
+}
+
+#screenshotModal .modal-caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.7);}
+  to {transform: scale(1);}
+}
+
+/* Efecto al tocar la imagen en la galería */
+.gallery-item img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+.banner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  isolation: isolate; /* 🔥 evita bugs con capas */
+  background: #111; /* ❌ sin imagen de fondo */
+}
+
+/* Imágenes */
+.banner-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Imagen actual (se queda visible) */
+.banner-img.current {
+  z-index: 1;
+  opacity: 1;
+}
+
+/* Imagen que entra con línea */
+.banner-img.next {
+  z-index: 2;
+
+  clip-path: inset(0 100% 0 0);
+
+  animation: revealHorizontal 2s linear forwards;
+  animation-delay: 0.01s; /* 🔥 FIX Android */
+
+  will-change: clip-path;
+  transform: translateZ(0);
+}
+
+/* Animación de la línea */
+@keyframes revealHorizontal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ICONOS SIEMPRE ENCIMA */
+.corner-btn {
+  position: absolute;
+  top: 15px;
+  z-index: 999;
+}

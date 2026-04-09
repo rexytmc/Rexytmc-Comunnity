@@ -8,16 +8,19 @@
 </head>
 <body onload="loadStatsAndShaders()">
 
-  <div class="banner" id="banner">
-    <div class="corner-btn corner-left" id="configBtn" title="Configuración">
-      <img src="assets/config.png" alt="Config">
-    </div>
+<div class="banner" id="banner">
+  <!-- Contenedor interno para la animación lineal -->
+  <div class="banner-slider" id="bannerSlider"></div>
 
-    <div class="corner-btn corner-right" id="menuBtn" title="Menú">
-      <img src="assets/menu.png" alt="Menu">
-    </div>
+  <!-- ICONOS: siempre por encima -->
+  <div class="corner-btn corner-left" id="configBtn" title="Configuración">
+    <img src="assets/config.png" alt="Config">
+  </div>
 
-    </div>
+  <div class="corner-btn corner-right" id="menuBtn" title="Menú">
+    <img src="assets/menu.png" alt="Menu">
+  </div>
+</div>
 
   <div class="profile">
     <img class="avatar" id="avatar" src="assets/icono.png" alt="Avatar">
@@ -42,52 +45,59 @@
 
   <div id="content" class="shader-list-container"></div>
 
+  <!-- Modal de detalle de shader -->
   <div id="shaderDetailModal" class="modal-overlay">
     <div class="detail-container">
-        
-        <button class="close-modal-btn" onclick="closeShaderDetailModal()">×</button>
-        
-        <div id="mainContentDetail">
-            <div class="main-screen">
-  <iframe 
-    src="https://www.youtube.com/embed/r8n2qzw_WeQ"
-    title="YouTube video"
-    allowfullscreen>
-  </iframe>
-</div>
+      <button class="close-modal-btn" onclick="closeShaderDetailModal()">×</button>
+      
+      <div id="mainContentDetail">
+        <div class="main-screen">
+          <iframe 
+            src="https://www.youtube.com/embed/r8n2qzw_WeQ"
+            title="YouTube video"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="screenshots-detail" id="screenshotsDetailContainer">
+        </div>
+      </div>
 
-            <div class="screenshots-detail" id="screenshotsDetailContainer">
-                </div>
+      <div class="info-detail">
+        <div class="title-detail" id="detailTitle"></div>
+        <div class="author-detail" id="detailAuthor">
+          <img id="detailAuthorIcon" src="assets/avatar.png" alt="Icono">
+          <span id="detailAuthorName"></span>
         </div>
 
-        <div class="info-detail">
-            <div class="title-detail" id="detailTitle"></div>
-            <div class="author-detail" id="detailAuthor">
-                <img id="detailAuthorIcon" src="assets/avatar.png" alt="Icono">
-                <span id="detailAuthorName"></span>
-            </div>
-
-            <div class="buttons-detail">
-                <a href="#" class="btn-detail btn-detail-download" id="detailDownloadBtn" target="_blank">Descargar</a>               
-                </div>
+        <div class="buttons-detail">
+          <a href="#" class="btn-detail btn-detail-download" id="detailDownloadBtn" target="_blank">Descargar</a>               
         </div>
+      </div>
 
-        <div class="details-detail">
-            <h3>Detalles</h3>
-            <div class="description-detail">
-                <p id="detailDescription"></p>
+      <div class="details-detail">
+        <h3>Detalles</h3>
+        <div class="description-detail">
+          <p id="detailDescription"></p>
 
-                <div class="extra-detail" id="detailFeaturesContainer">
-                    <h4>Características:</h4>
-                    <ul id="detailFeaturesList" style="list-style:disc; margin-left:20px; color:#ddd; font-size:14px; text-align:left;">
-                        </ul>
-                </div>
+          <div class="extra-detail" id="detailFeaturesContainer">
+            <h4>Características:</h4>
+            <ul id="detailFeaturesList" style="list-style:disc; margin-left:20px; color:#ddd; font-size:14px; text-align:left;">
+            </ul>
+          </div>
 
-                <span class="show-more-detail" id="toggleDetailsDetail">Mostrar más ▼</span>
-            </div>
+          <span class="show-more-detail" id="toggleDetailsDetail">Mostrar más ▼</span>
         </div>
+      </div>
     </div>
   </div>
+
+  <!-- 🔥 Modal para screenshots (descripción eliminada) -->
+  <div id="screenshotModal" class="modal-overlay" onclick="closeScreenshotModal()">
+    <span class="close-modal-btn">&times;</span>
+    <img class="modal-content" id="screenshotModalImg" alt="Screenshot">
+    <!-- Se eliminó el div de descripción -->
+  </div>
+
 <script src="js/main.js"></script>
 </body>
 </html>

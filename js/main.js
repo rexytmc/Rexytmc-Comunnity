@@ -5,72 +5,76 @@
     // Enlace de Donación General
     const GENERAL_DONATE_LINK = 'https://www.patreon.com/cw/Rexytmc'; 
     const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@rexytmc-s3d?si=7E_OWq8eIAhF_K9F'; 
-    const ENABLE_YOUTUBE_VIDEO = false; 
+    const ENABLE_YOUTUBE_VIDEO = true; 
     const SHADERS_PER_PAGE = 20;
     let currentPage = 1;
     let currentSearchTerm = '';
+   
+   // --- ANIMACIÓN BUSCADOR ---
+const searchWords = [
+  "Shaders...",
+  "Worlds...",
+  "Texturas...",
+  "Addons...",
+    "título...",
+  "autor...",
+  "características..."
+];
+
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
+let typingTimeout;
     
     // --- DATOS DE EJEMPLO 1: SHADERS ---
     const rawShaders = [
         {
-            id: 1,
+            id: 2,
             title: "NEWBXSUPERVANILLA",
             author: "Rexytmc",
             description: "Shader Descontinuado. Esperar a que se actualize a la 1.2 para la nueva version de mc 1.21.1.1 ⚠️             Un shader estilo vanilla inspirado en SuperDuperVanilla la iluminación y el agua mantiene el look clásico de Minecraft.",
-            features: ["Tools Glow", "Vanilla", "Specular Reflection", "Items Glow", "Flowers Glow", "Lava Noise"],
+            features: ["Shader", "Vanilla", "Specular Reflection", "Items Glow", "Flowers Glow", "Lava Noise"],
             downloadLink: "https://link-center.net/1317037/gdBte5PRdr2L", 
-            youtubeLink: "https://youtu.be/dO_WQRvdv4M?feature=shared",
-            downloads: 0, 
-            likes:0,
+            youtubeLink: "https://youtu.be/dQw4w9WgXcQ?si=kn7Kw-WW1jH0qHqh",     
             imagePath: "assets/supervanilla", 
             versions: ["r1.1", "1.21", "Android"],
-            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png"],
-            exclusiveLink: "https://gumroad.com/l/supervanilla_premium" 
+            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png"],          
         },
         {
-            id: 2,
+            id: 4,
             title: "NEWBXREXYTMC",
             author: "Rexytmc",
             description: "Un Shader estilo vanilla inspirado en los complementary de java.",
-            features: ["Raysun", "Leaves Wave", "Mobs Bloom", "Particles Bloom", "Items glow", "Shadow Grass", "Vanilla"],
-            downloadLink: "https://link-center.net/1317037/Rj9NFLNAGWpC", 
+            features: ["Shader", "Leaves Wave", "Mobs Bloom", "Particles Bloom", "Items glow", "Raysun", "Vanilla"],
+            downloadLink: "https://link-target.net/1317037/tOqOIIbcUvhi", 
             youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
-            downloads: 10, 
-            likes: 0,
             imagePath: "assets/complementary",
-            versions: ["r1.1", "1.21.1.1", "Android"],
+            versions: ["r1.1.1", "1.26.13", "Android"],
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
-            exclusiveLink: null 
         },
         {
-                id: 3,
+                id: 1,
             title: "NEWBXITERATIONT",
             author: "Rexytmc",
             description: "Aun sigue en beta solo se implemento el end ;-;",
             features: [],
             downloadLink: "https://link-center.net/1317037/UYMTGV0nGDxr", 
             youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
-            downloads: 0, 
-            likes: 0,
             imagePath: "assets/iterationt",
             versions: ["r1.1", "1.21.1.1", "Android"],
             screenshotFiles: [],
-            exclusiveLink: null 
         },
         {
-                    id: 4,
+                    id: 3,
             title: "Minecraft Bedrock",
             author: "Mojang",
-            description: "Esta versión fue lanzada el 31 de Marzo de 2026. Se corrigieron varios errores que podían afectar la jugabilidad. Se solucionó un problema en Realms Stories donde la pestaña Miembros no se cargaba correctamente. Se solucionó un problema con la lista de permitidos para los servidores.",
+            description: "Esta versión fue lanzada el 8 de Abril de 2026. Se corrigieron varios errores que podían afectar la jugabilidad. Se solucionó un problema con los componentes de entidades personalizadas bloqueados detrás de identificadores de tiempo de ejecución. Los gestos seleccionados ya no vuelven a los valores predeterminados al reiniciar el título.",
             features: [],
-            downloadLink: "https://link-hub.net/1317037/eLo0MR7eXlkg", 
+            downloadLink: "https://link-hub.net/1317037/vZTI1u0CT6hS", 
             youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
-            downloads: 0, 
-            likes: 0,
             imagePath: "assets/minecraft",
-            versions: ["1.26.12", "32bits 64bits", "878.96 MB"],
+            versions: ["1.26.13", "32bits 64bits", "878.96 MB"],
             screenshotFiles: [],
-            exclusiveLink: null 
         }
     ]; 
     
@@ -109,12 +113,13 @@ function generateScreenshotsAuto(max = 100) {
 const screenshotImages = generateScreenshotsAuto();
     
     // Estadísticas iniciales
-    let profileStats = {
-        followers: 150,
-        projects: publishedShaders.length, 
-        downloads: publishedShaders.reduce((sum, s) => sum + s.downloads, 112414), 
-        isFollowing: false 
-    };
+    // Estadísticas iniciales
+let profileStats = {
+    followers: 150,
+    projects: publishedShaders.length, 
+    downloads: 112414, // valor fijo
+    isFollowing: false 
+};
     
     // HTML de la sección de Información
     const infoHTML = `
@@ -155,8 +160,7 @@ const screenshotImages = generateScreenshotsAuto();
     // LÓGICA DE PERSISTENCIA Y ESTADÍSTICAS
     // ------------------------------------------------------------------
 
-    function loadStatsAndShaders() {
-        profileStats.isFollowing = JSON.parse(localStorage.getItem('isFollowingState') || 'false');
+    function loadStatsAndShaders() {      
         updateProfileDisplay();
         switchTab('shader');
     }
@@ -172,32 +176,9 @@ const screenshotImages = generateScreenshotsAuto();
         profileStatsElement.textContent = 
             `${profileStats.followers.toLocaleString()} Followers · ${profileStats.projects} Projects · ${formatNumber(profileStats.downloads)} Downloads`;
             
-        if (profileStats.isFollowing) {
-            followBtn.textContent = 'SEGUIDO';
-            followBtn.classList.add('following');
-        } else {
-            followBtn.textContent = 'Youtube';
-            followBtn.classList.remove('following');
-        }
-    }
-    
-    function toggleFollow() {
-        if (!profileStats.isFollowing) {
-            window.open(YOUTUBE_CHANNEL_URL, '_blank'); 
-            
-            profileStats.followers++; 
-            profileStats.isFollowing = true;
-            localStorage.setItem('isFollowingState', JSON.stringify(profileStats.isFollowing));
-            updateProfileDisplay();
-        } else {
-            profileStats.followers--; 
-            profileStats.isFollowing = false;
-            localStorage.setItem('isFollowingState', JSON.stringify(profileStats.isFollowing));
-            updateProfileDisplay();
-        }
-    }
-
-
+        followBtn.textContent = 'YouTube';
+followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
+}
     // ------------------------------------------------------------------
     // LÓGICA DE SHADERS Y DETALLE
     // ------------------------------------------------------------------
@@ -338,18 +319,16 @@ const screenshotImages = generateScreenshotsAuto();
 
     // TRACKING DE DESCARGA
     function trackDownload(shaderId, downloadLink) {
-        const shader = publishedShaders.find(s => s.id === shaderId);
-        if (!shader || !downloadLink) return;
-        
-        shader.downloads++; 
-        profileStats.downloads++; 
-        updateProfileDisplay(); 
-        
-        window.open(downloadLink, '_blank');
-        
-        event.preventDefault(); 
-        event.stopPropagation();
-    }
+    const shader = publishedShaders.find(s => s.id === shaderId);
+    if (!shader || !downloadLink) return;
+    
+    shader.downloads++; 
+    updateProfileDisplay(); 
+    window.open(downloadLink, '_blank');
+    
+    event.preventDefault(); 
+    event.stopPropagation();
+}
     
     // FUNCIONES DE FILTRADO Y PAGINACIÓN 
 
@@ -385,12 +364,43 @@ const screenshotImages = generateScreenshotsAuto();
         }
     }
 
+function animatePlaceholder() {
+  const input = document.getElementById("shaderSearchInput");
+  if (!input) return;
+
+  if (input.value.length > 0) {
+    input.placeholder = "Buscar...";
+    return;
+  }
+
+  const word = searchWords[wordIndex];
+
+  if (deleting) charIndex--;
+  else charIndex++;
+
+  input.placeholder = "Buscar por " + word.substring(0, charIndex);
+
+  let speed = deleting ? 40 : 80;
+
+  if (!deleting && charIndex === word.length) {
+    speed = 1200;
+    deleting = true;
+  } else if (deleting && charIndex === 0) {
+    deleting = false;
+    wordIndex = (wordIndex + 1) % searchWords.length;
+    speed = 600;
+  }
+
+  typingTimeout = setTimeout(animatePlaceholder, speed);
+}
+
     // RENDERIZADO PRINCIPAL DE SHADERS 
     function renderShadersList() {
       content.className = 'shader-list-container';
       content.innerHTML = ''; 
 
-      const filteredShaders = filterShaders(currentSearchTerm);
+      const filteredShaders = filterShaders(currentSearchTerm)
+  .sort((a, b) => b.id - a.id); //ID mayor primero
       const totalPages = Math.ceil(filteredShaders.length / SHADERS_PER_PAGE);
       
       if (currentPage > totalPages && totalPages > 0) {
@@ -405,12 +415,17 @@ const screenshotImages = generateScreenshotsAuto();
 
       // 1. Renderizar Barra de Búsqueda
       const searchContainer = document.createElement('div');
-      searchContainer.className = 'search-bar';
-      searchContainer.innerHTML = `
-        <input type="text" id="shaderSearchInput" placeholder="Buscar shaders por título, autor o característica..." value="${currentSearchTerm}">
-        <button onclick="handleSearch()">Buscar</button>
-      `;
+searchContainer.className = 'search-bar';
+searchContainer.innerHTML = `
+  <input type="text" id="shaderSearchInput" value="${currentSearchTerm}">
+  <button onclick="handleSearch()">Buscar</button>
+`;
       content.appendChild(searchContainer);
+      
+      clearTimeout(typingTimeout);
+charIndex = 0;
+deleting = false;
+animatePlaceholder();
       
       document.getElementById('shaderSearchInput').addEventListener('keyup', (e) => {
           if (e.key === 'Enter') handleSearch();
@@ -431,13 +446,13 @@ const screenshotImages = generateScreenshotsAuto();
                 "Agua Sutil": "💧",
                 "Efecto 'Lens Flare'": "☀️",
                 "Vanilla-like": "🍦",
-                "Iluminación 💡": "💡",
-                "Agua Traslúcida": "💦",
-                "Sombreado": "⚫",
-                "Alto Detalle": "✨",
+                "Iluminación": "💡",
                 "PVP": "⚔️",
-                "FPS Boost": "🚀",
-                "Sin niebla": "🚫"
+                "Sombreado": "⚫",
+                "Shader": "🌅",
+                "World": "🏞",
+                "Texturas": "🎨",
+                "Addons": "🗂"
             };
             
             const featuresHtml = shader.features.map(feat => 
@@ -504,10 +519,8 @@ const screenshotImages = generateScreenshotsAuto();
 
 function loadScreenshots(images) {
   content.innerHTML = '';
-  
-  // 👇 IMPORTANTE: usar TU clase
   content.className = 'gallery-grid'; 
-  
+
   if (images.length === 0) {
     content.innerHTML = '<p style="text-align:center; color:#555; padding:20px;">Aún no hay screenshots subidos.</p>';
     return;
@@ -516,14 +529,34 @@ function loadScreenshots(images) {
   images.forEach(item => {
     const div = document.createElement('div');
     div.className = 'gallery-item';
+    
+    // Solo imagen, sin <p> ni descripción visible
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = item.desc;
 
-    // 🔥 SOLO IMAGEN (sin <p> para evitar huecos)
-    div.innerHTML = `<img src="${item.src}" alt="${item.desc}">`;
+    // Evento para abrir modal
+    img.onclick = () => openScreenshotModal(item.src, item.desc);
 
+    div.appendChild(img);
     content.appendChild(div);
   });
 }
 
+function openScreenshotModal(src, desc) {
+  const modal = document.getElementById('screenshotModal');
+  const modalImg = document.getElementById('screenshotModalImg');
+  const modalDesc = document.getElementById('screenshotModalDesc');
+
+  modal.style.display = 'flex';
+  modalImg.src = src;
+  modalDesc.textContent = desc || '';
+}
+
+// Cerrar modal al hacer click en overlay o en "×"
+function closeScreenshotModal() {
+  document.getElementById('screenshotModal').style.display = 'none';
+}
 
 // ABRIR LINK
 function openLink(url) { 
@@ -553,3 +586,38 @@ function switchTab(tab) {
     content.innerHTML = infoHTML;
   }
 }
+
+const banners = [
+  'assets/portada.png',
+  'assets/portada1.png',
+  'assets/portada2.png',
+  'assets/portada3.png'
+];
+
+const container = document.querySelector('.banner');
+
+let index = 0;
+
+// Imagen inicial
+let current = document.createElement('div');
+current.className = 'banner-img current';
+current.style.backgroundImage = `url(${banners[index]})`;
+container.appendChild(current);
+
+function changeImage() {
+  index = (index + 1) % banners.length;
+
+  let next = document.createElement('div');
+  next.className = 'banner-img next';
+  next.style.backgroundImage = `url(${banners[index]})`;
+  container.appendChild(next);
+
+  setTimeout(() => {
+    container.removeChild(current);
+    next.classList.remove('next');
+    next.classList.add('current');
+    current = next;
+  }, 2000);
+}
+
+setInterval(changeImage, 2000); /* 🔥 tiempo correcto */
