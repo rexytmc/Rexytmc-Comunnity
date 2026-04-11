@@ -29,7 +29,7 @@ let typingTimeout;
     // --- DATOS DE EJEMPLO 1: SHADERS ---
     const rawShaders = [
         {
-            id: 2,
+            id: 1,
             title: "NEWBXSUPERVANILLA",
             author: "Rexytmc",
             description: "Shader Descontinuado. Esperar a que se actualize a la 1.2 para la nueva version de mc 1.21.1.1 ⚠️             Un shader estilo vanilla inspirado en SuperDuperVanilla la iluminación y el agua mantiene el look clásico de Minecraft.",
@@ -41,7 +41,7 @@ let typingTimeout;
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png"],          
         },
         {
-            id: 4,
+            id: 3,
             title: "NEWBXREXYTMC",
             author: "Rexytmc",
             description: "Un Shader estilo vanilla inspirado en los complementary de java.",
@@ -53,19 +53,19 @@ let typingTimeout;
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
         },
         {
-                id: 1,
+                id: 4,
             title: "NEWBXITERATIONT",
             author: "Rexytmc",
-            description: "Aun sigue en beta solo se implemento el end ;-;",
-            features: [],
-            downloadLink: "https://link-center.net/1317037/UYMTGV0nGDxr", 
-            youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
+            description: "Shader Inspirado en Iterationt de java",
+            features: ["Shader", "Shadow", "Glow", "Cloud Unbound", "End Black Hole"],
+            downloadLink: "https://direct-link.net/1317037/1Rvzadw613d7", 
+            youtubeLink: "https://youtu.be/qMgznUpKK1w?si=H-r2DHCsyVZmD7ip",
             imagePath: "assets/iterationt",
-            versions: ["r1.1", "1.21.1.1", "Android"],
-            screenshotFiles: [],
+            versions: ["r1.0", "1.26.13", "Android"],
+            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
         },
         {
-                    id: 3,
+                    id: 2,
             title: "Minecraft Bedrock",
             author: "Mojang",
             description: "Esta versión fue lanzada el 8 de Abril de 2026. Se corrigieron varios errores que podían afectar la jugabilidad. Se solucionó un problema con los componentes de entidades personalizadas bloqueados detrás de identificadores de tiempo de ejecución. Los gestos seleccionados ya no vuelven a los valores predeterminados al reiniciar el título.",
