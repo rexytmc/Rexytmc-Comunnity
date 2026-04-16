@@ -35,7 +35,7 @@ let typingTimeout;
             description: "Shader Descontinuado. Esperar a que se actualize a la 1.2 para la nueva version de mc 1.21.1.1 ⚠️             Un shader estilo vanilla inspirado en SuperDuperVanilla la iluminación y el agua mantiene el look clásico de Minecraft.",
             features: ["Shader", "Vanilla", "Specular Reflection", "Items Glow", "Flowers Glow", "Lava Noise"],
             downloadLink: "https://link-center.net/1317037/gdBte5PRdr2L", 
-            youtubeLink: "https://youtu.be/dQw4w9WgXcQ?si=kn7Kw-WW1jH0qHqh",     
+            youtubeLink: "https://youtu.be/dO_WQRvdv4M?si=SVJrrERHLGZ9EW8T",     
             imagePath: "assets/supervanilla", 
             versions: ["r1.1", "1.21", "Android"],
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png"],          
@@ -47,7 +47,7 @@ let typingTimeout;
             description: "Un Shader estilo vanilla inspirado en los complementary de java.",
             features: ["Shader", "Leaves Wave", "Mobs Bloom", "Particles Bloom", "Items glow", "Raysun", "Vanilla"],
             downloadLink: "https://link-target.net/1317037/tOqOIIbcUvhi", 
-            youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
+            youtubeLink: "https://youtu.be/LQIJAHdpQWE?si=qEU7z5HQmNoWP4pJ",
             imagePath: "assets/complementary",
             versions: ["r1.1.1", "1.26.13", "Android"],
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
@@ -75,6 +75,18 @@ let typingTimeout;
             imagePath: "assets/minecraft",
             versions: ["1.26.13", "32bits 64bits", "878.96 MB"],
             screenshotFiles: [],
+        },
+        {
+                    id: 5,
+            title: "Actions&Stuff",
+            author: "Oreville Studios",
+            description: "Texture pack para mejorar animaciones, items, bloques, etc.",
+            features: ["Texturas", "Animations", "3D"],
+            downloadLink: "https://link-hub.net/1317037/vZTI1u0CT6hS", 
+            youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
+            imagePath: "assets/actions&stuff",
+            versions: ["v1.10","1.26.13"],
+            screenshotFiles: ["1.png","2.png","3.png"],
         }
     ]; 
     
@@ -90,32 +102,56 @@ let typingTimeout;
     });
     // --- DATOS DE EJEMPLO 2: SCREENSHOTS ---
 function generateScreenshotsAuto(max = 100) {
-  const images = [];
+  const items = [];
 
-  for (let i = max; i >= 1; i--) {
+  // 🔥 AGREGAR VIDEOS CON NÚMERO
+  videoList.forEach(video => {
+    items.push({
+      type: "video",
+      src: video.src,
+      num: video.num,
+      desc: `Video ${video.num}`
+    });
+  });
+
+  // 🔥 AGREGAR IMÁGENES CON NÚMERO
+  for (let i = 1; i <= max; i++) {
+    const path = `assets/screenshots/${i}.png`;
+
     const img = new Image();
-    img.src = `assets/screenshots/${i}.png`;
+    img.src = path;
 
     img.onload = () => {
-      images.push({
-        src: img.src,
+      items.push({
+        type: "image",
+        src: path,
+        num: i,
         desc: `Screenshot ${i}`
       });
 
-      // recargar galería cuando encuentra imágenes reales
-      loadScreenshots(images);
+      // 🔥 ORDEN GLOBAL (VIDEOS + IMÁGENES)
+      const ordered = items.sort((a, b) => b.num - a.num);
+
+      loadScreenshots(ordered);
     };
   }
 
-  return images;
+  return items;
 }
+
+// 🔥 VIDEOS MANUALES (AGREGA LOS QUE QUIERAS)
+const videoList = [
+  { num: 6, src: "https://youtu.be/qMgznUpKK1w?si=Xt3xrJHHGV0FQ8P8" },
+  { num: 3, src: "https://youtu.be/LQIJAHdpQWE?si=M6sb3MF6Kums1whF" },
+  { num: 1, src: "https://youtu.be/dO_WQRvdv4M?si=SVJrrERHLGZ9EW8T" }
+];
 
 const screenshotImages = generateScreenshotsAuto();
     
     // Estadísticas iniciales
     // Estadísticas iniciales
 let profileStats = {
-    followers: 150,
+    followers: 189,
     projects: publishedShaders.length, 
     downloads: 112414, // valor fijo
     isFollowing: false 
@@ -123,12 +159,30 @@ let profileStats = {
     
     // HTML de la sección de Información
     const infoHTML = `
-      <div class="info-accordion">
-        <details><summary>HOW TO INSTALL SHADER</summary><p>Guía paso a paso para instalar shaders en Minecraft.</p></details>
+  <div class="info-accordion">
+
+    <details>
+      <summary>HOW TO INSTALL SHADER</summary>
+
+      <div class="video-wrapper">
+        <div class="video-container">
+          <iframe 
+            src="https://youtube.com/shorts/OsQSX6Za5fk?si=Ww0lvrunsU_8Ie37"
+            frameborder="0"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <p class="video-description">
+        Guía paso a paso para instalar shaders en Minecraft.
+      </p>
+
+    </details>
         <details><summary>ADD-ONS | TEXTURE SHADER</summary><p>Texturas y mejoras visuales para tu shader.</p></details>
         <details><summary>CREATE YOUR SHADER</summary><p>Tutorial para crear tu propio shader desde cero.</p></details>
         <details><summary>SPECIAL CREDITS</summary><p>Muchas gracias a @Stellar por crear el servidor de discord y algunos codigos compartidos:]
- Tambien a @Jesusmiguelgamer por sus texturas noise personalizadas la motivacion y inspiracion :D.</p></details>
+ Tambien a @Jesusmiguelgamer por sus texturas noise y sky personalizadas la motivacion y inspiracion :D.</p></details>
 
         <div class="social-section">
           <h3>SEGUIR A REXYTMC</h3>
@@ -183,15 +237,18 @@ followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
     // LÓGICA DE SHADERS Y DETALLE
     // ------------------------------------------------------------------
 
-    function getYouTubeEmbedUrl(url) {
-        if (!url || !ENABLE_YOUTUBE_VIDEO) return null; 
-        const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        const match = url.match(regExp);
-        if (match && match[2].length === 11) {
-            return `https://www.youtube.com/embed/${match[2]}`;
-        }
-        return null;
-    }
+    function getYouTubeEmbed(url) {
+  if (!url || !ENABLE_YOUTUBE_VIDEO) return null;
+
+  const regExp = /^.*(youtu\.be\/|watch\?v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+
+  if (match && match[2].length === 11) {
+    return `https://www.youtube.com/embed/${match[2]}`;
+  }
+
+  return null;
+}
     
     let currentDetailShader = null; 
 
@@ -218,7 +275,7 @@ followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
         
         // 3. Contenido Principal (Portada)
         mainScreen.innerHTML = '';
-        const youtubeEmbedUrl = getYouTubeEmbedUrl(shader.youtubeLink);
+        const youtubeEmbedUrl = getYouTubeEmbed(shader.youtubeLink);
         let mainContentIsVideo = false;
 
         if (youtubeEmbedUrl) {
@@ -232,19 +289,26 @@ followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
         screenshotsContainer.innerHTML = '';
         
         const allScreenshots = [
-            {src: shader.coverImage || 'https://via.placeholder.com/160x100.png?text=Portada', isCover: true}, 
-            ...(shader.screenshots || []).map(src => ({src, isCover: false}))
-        ];
+    ...(youtubeEmbedUrl ? [{ type: "video", src: youtubeEmbedUrl }] : []),
+    { type: "image", src: shader.coverImage || 'https://via.placeholder.com/160x100.png?text=Portada' },
+    ...(shader.screenshots || []).map(src => ({ type: "image", src }))
+];
 
         if (allScreenshots.length > 0) {
-            allScreenshots.forEach((item, index) => {
-                const img = document.createElement('img');
-                img.src = item.src;
-                img.alt = `Miniatura ${index + 1}`;
-                img.dataset.full = item.src;
-                img.onclick = () => switchMainScreen(img.src);
-                screenshotsContainer.appendChild(img);
-            });
+            allScreenshots.forEach((item) => {
+    const img = document.createElement('img');
+
+    if (item.type === "video") {
+        const videoId = youtubeEmbedUrl.split('/embed/')[1];
+        img.src = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+        img.onclick = () => switchMainScreen("video");
+    } else {
+        img.src = item.src;
+        img.onclick = () => switchMainScreen(item.src);
+    }
+
+    screenshotsContainer.appendChild(img);
+});
             
             if (!mainContentIsVideo) {
                 const firstThumbnail = screenshotsContainer.querySelector('img');
@@ -289,13 +353,28 @@ followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
 
     // Manejar el cambio de imagen principal en el modal de detalle
     function switchMainScreen(src) {
-        const mainScreenImg = document.getElementById('mainScreenDetail');
-        if (mainScreenImg) mainScreenImg.src = src;
+    const mainScreen = document.querySelector('.main-screen');
+    const youtubeEmbedUrl = getYouTubeEmbed(currentDetailShader.youtubeLink);
 
-        document.querySelectorAll('.screenshots-detail img').forEach(s => s.classList.remove('active'));
-        const activeThumb = document.querySelector(`.screenshots-detail img[data-full="${src}"]`);
-        if (activeThumb) activeThumb.classList.add('active');
+    if (src === "video" && youtubeEmbedUrl) {
+        mainScreen.innerHTML = `
+            <iframe src="${youtubeEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+        `;
+    } else {
+        mainScreen.innerHTML = `
+            <img id="mainScreenDetail" src="${src}">
+        `;
     }
+
+    // activar miniatura
+    document.querySelectorAll('.screenshots-detail img')
+      .forEach(s => s.classList.remove('active'));
+
+    const active = Array.from(document.querySelectorAll('.screenshots-detail img'))
+      .find(img => img.onclick.toString().includes(src));
+
+    if (active) active.classList.add('active');
+}
 
     function toggleDetailDetails() {
         const extra = document.getElementById('detailFeaturesContainer');
@@ -531,14 +610,24 @@ function loadScreenshots(images) {
     div.className = 'gallery-item';
     
     // Solo imagen, sin <p> ni descripción visible
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = item.desc;
+    if (item.type === "video") {
+  const iframe = document.createElement('iframe');
+  iframe.src = getYouTubeEmbed(item.src);
+  iframe.frameBorder = "0";
+  iframe.allowFullscreen = true;
+  iframe.className = "gallery-video";
 
-    // Evento para abrir modal
-    img.onclick = () => openScreenshotModal(item.src, item.desc);
+  div.appendChild(iframe);
 
-    div.appendChild(img);
+} else {
+  const img = document.createElement('img');
+  img.src = item.src;
+  img.alt = item.desc;
+
+  img.onclick = () => openScreenshotModal(item.src, item.desc);
+
+  div.appendChild(img);
+}
     content.appendChild(div);
   });
 }
