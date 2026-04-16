@@ -82,7 +82,7 @@ let typingTimeout;
             author: "Oreville Studios",
             description: "Texture pack para mejorar animaciones, items, bloques, etc.",
             features: ["Texturas", "Animations", "3D"],
-            downloadLink: "https://link-hub.net/1317037/vZTI1u0CT6hS", 
+            downloadLink: "https://link-target.net/1317037/p024gx7166ky", 
             youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
             imagePath: "assets/actions&stuff",
             versions: ["v1.10","1.26.13"],
@@ -167,7 +167,7 @@ let profileStats = {
       <div class="video-wrapper">
         <div class="video-container">
           <iframe 
-            src="https://youtube.com/shorts/OsQSX6Za5fk?si=Ww0lvrunsU_8Ie37"
+            src="https://youtube.com/shorts/OsQSX6Za5fk?si=AnZ_hLV3PH9-qYUv"
             frameborder="0"
             allowfullscreen>
           </iframe>

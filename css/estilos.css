@@ -684,6 +684,20 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
 .gallery-item img:hover {
   transform: scale(1.05);
 }
+
+.gallery-item iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+.gallery-item {
+  display: inline-block; /* 🔥 FIX para column layout */
+  width: 100%;
+}
+
 .banner {
   position: relative;
   width: 100%;
