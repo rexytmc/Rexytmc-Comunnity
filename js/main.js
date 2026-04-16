@@ -83,7 +83,7 @@ let typingTimeout;
             description: "Texture pack para mejorar animaciones, items, bloques, etc.",
             features: ["Texturas", "Animations", "3D"],
             downloadLink: "https://link-target.net/1317037/p024gx7166ky", 
-            youtubeLink: "https://www.youtube.com/watch?v=youtube_complementary",
+            youtubeLink: "https://youtu.be/gSWT6Ggp0w8?si=gIp8VYu-4MS5Ppfk",
             imagePath: "assets/actions&stuff",
             versions: ["v1.10","1.26.13"],
             screenshotFiles: ["1.png","2.png","3.png"],
@@ -167,7 +167,7 @@ let profileStats = {
       <div class="video-wrapper">
         <div class="video-container">
           <iframe 
-            src="https://youtube.com/shorts/OsQSX6Za5fk?si=AnZ_hLV3PH9-qYUv"
+            src="https://youtu.be/YF2zsJ0L1I8?si=-N6AuLgrOwpX99rb"
             frameborder="0"
             allowfullscreen>
           </iframe>
