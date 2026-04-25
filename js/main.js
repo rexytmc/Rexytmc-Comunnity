@@ -53,6 +53,18 @@ let typingTimeout;
             screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
         },
         {
+            id: 6,
+            title: "NEWBXREXYTMC",
+            author: "Rexytmc",
+            description: "Un Shader estilo vanilla inspirado en los complementary de java.",
+            features: ["Shader", "Leaves Wave", "Mobs Glow", "Particles Bloom", "Items glow", "Sundir", "Vanilla"],
+            downloadLink: "https://link-center.net/1317037/XYvPfwshlAaV", 
+            youtubeLink: "https://youtu.be/x4ZUDdb8MO0?si=6cryWIAP_Sbsi4Zh",
+            imagePath: "assets/complementary1.2",
+            versions: ["r1.2", "1.26.13", "Android"],
+            screenshotFiles: ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png"],
+        },
+        {
                 id: 4,
             title: "NEWBXITERATIONT",
             author: "Rexytmc",
@@ -142,6 +154,7 @@ function generateScreenshotsAuto(max = 100) {
 // 🔥 VIDEOS MANUALES (AGREGA LOS QUE QUIERAS)
 const videoList = [
   { num: 6, src: "https://youtu.be/qMgznUpKK1w?si=Xt3xrJHHGV0FQ8P8" },
+  { num: 11, src: "https://youtu.be/x4ZUDdb8MO0?si=6cryWIAP_Sbsi4Zh" },
   { num: 3, src: "https://youtu.be/LQIJAHdpQWE?si=M6sb3MF6Kums1whF" },
   { num: 1, src: "https://youtu.be/dO_WQRvdv4M?si=SVJrrERHLGZ9EW8T" }
 ];
