@@ -14,11 +14,11 @@
 const searchWords = [
   "Shaders...",
   "Worlds...",
-  "Texturas...",
-  "Addons...",
-    "título...",
-  "autor...",
-  "características..."
+  "Textures...",
+  "Add-ons...",
+    "title...",
+  "author...",
+  "features..."
 ];
 
 let wordIndex = 0;
@@ -170,7 +170,7 @@ let profileStats = {
     isFollowing: false 
 };
     
-    // HTML de la sección de Información
+    // HTML de la sección de Information
     const infoHTML = `
   <div class="info-accordion">
 
@@ -461,7 +461,7 @@ function animatePlaceholder() {
   if (!input) return;
 
   if (input.value.length > 0) {
-    input.placeholder = "Buscar...";
+    input.placeholder = "Search...";
     return;
   }
 
@@ -470,7 +470,7 @@ function animatePlaceholder() {
   if (deleting) charIndex--;
   else charIndex++;
 
-  input.placeholder = "Buscar por " + word.substring(0, charIndex);
+  input.placeholder = "Search por " + word.substring(0, charIndex);
 
   let speed = deleting ? 40 : 80;
 
@@ -510,7 +510,7 @@ function animatePlaceholder() {
 searchContainer.className = 'search-bar';
 searchContainer.innerHTML = `
   <input type="text" id="shaderSearchInput" value="${currentSearchTerm}">
-  <button onclick="handleSearch()">Buscar</button>
+  <button onclick="handleSearch()">Search</button>
 `;
       content.appendChild(searchContainer);
       
@@ -551,7 +551,7 @@ animatePlaceholder();
                 `<div class="shader-feature">${featureIcons[feat] || '🔹'} ${feat}</div>`
             ).join('');
 
-            // Información de Versión Transparente
+            // Information de Versión Transparente
             const versionInfoHtml = (shader.versions || []).map(v => `<span>${v}</span>`).join(' • ');
             
             const card = document.createElement('div');
@@ -584,7 +584,7 @@ animatePlaceholder();
             </div>
             
             <div class="shader-actions-float" style="right: 15px; bottom: 15px;">
-                <button class="action-btn btn-download" onclick="event.stopPropagation(); trackDownload(${shader.id}, '${shader.downloadLink}')">Descargar</button>
+                <button class="action-btn btn-download" onclick="event.stopPropagation(); trackDownload(${shader.id}, '${shader.downloadLink}')">Download</button>
             </div>
             `;
             listDiv.appendChild(card);
