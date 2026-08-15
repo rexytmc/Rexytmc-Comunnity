@@ -115,7 +115,7 @@ body {
 
 .stats { margin: 10px 0; font-size: 13px; color: #ccc; }
 
-.actions { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+.actions { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
 
 .btn {
   padding: 8px 16px;
@@ -126,6 +126,8 @@ body {
   font-size: 13px;
   color: #fff;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-follow { 
@@ -144,7 +146,14 @@ body {
   box-shadow: 0 0 8px rgba(88, 101, 242, 0.6); 
 }
 
-.btn-follow:hover, .btn-donate:hover { transform: scale(1.05); }
+/* NUEVO BOTÓN DORADO DE DONATE (KO-FI) */
+.btn-donate-gold {
+  background: linear-gradient(90deg, #ffd700, #ffa500);
+  color: #000;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.btn-follow:hover, .btn-donate:hover, .btn-donate-gold:hover { transform: scale(1.05); }
 
 /* ==================================================================
    NAVEGACIÓN (TABS)
@@ -409,7 +418,7 @@ details p { padding: 12px; color: #aaa; font-size: 13px; background: #0a0a0a; ma
 .social-section { text-align: center; margin: 30px 0; }
 .social-section h3 { font-size: 15px; letter-spacing: 1px; color: #ccc; margin-bottom: 15px; }
 .social-icons { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.social-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.social-row { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
 .social-icons img { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; transition: 0.2s; background: #111; padding: 5px; }
 
 .social-icons img:hover[data-color="youtube"] { background:#ff0000; }
@@ -503,11 +512,22 @@ details p { padding: 12px; color: #aaa; font-size: 13px; background: #0a0a0a; ma
 .author-detail img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
 
 .buttons-detail { display: flex; flex-direction: column; gap: 10px; }
-.btn-detail { text-align: center; text-decoration: none; font-weight: bold; text-transform: uppercase; padding: 12px; border-radius: 6px; transition: 0.3s; border: none; cursor: pointer; font-size: 14px; }
+.btn-detail { text-align: center; text-decoration: none; font-weight: bold; text-transform: uppercase; padding: 12px; border-radius: 6px; transition: 0.3s; border: none; cursor: pointer; font-size: 14px; display: block; }
 .btn-detail-download { background: linear-gradient(90deg, #4CAF50, #2E7D32); color: #fff; }
-.btn-detail-download:hover { background: linear-gradient(90deg, #66BB6A, #388E3C); }
+.btn-detail-download:hover { background: linear-gradient(90deg, #66BB6A, #388E3C); transform: scale(1.02); }
 .btn-detail-exclusive { background: linear-gradient(90deg, #ffd700, #ffa500); color: #000; box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
 .btn-detail-exclusive:hover { background: linear-gradient(90deg, #ffe066, #d4a700); transform: scale(1.02); }
+
+/* NUEVO BOTÓN DORADO DE WINDOWS & IOS */
+.btn-detail-windows { 
+  background: linear-gradient(90deg, #ffd700, #ffa500); 
+  color: #000; 
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); 
+}
+.btn-detail-windows:hover { 
+  background: linear-gradient(90deg, #ffe066, #d4a700); 
+  transform: scale(1.02); 
+}
 
 .details-detail { background-color: #181818; margin-top: 1px; }
 .details-detail h3 { text-transform: uppercase; margin-bottom: 8px; font-size: 11px; color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px; }
