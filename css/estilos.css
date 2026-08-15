@@ -780,15 +780,55 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   background-position:center center;
 }
 
+/* WINDOWS / PC */
+.gallery-container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding:10px;
+  align-items:stretch;
+}
+
+.side-image,
+.gallery-grid{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+
+.side-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.gallery-item{
+  width:100%;
+}
+
+.gallery-item img{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+}
+
 /* ANDROID / MOVIL */
 @media (max-width:768px){
 
   .gallery-container{
+    display:grid;
     grid-template-columns:1fr;
     gap:16px;
   }
 
   .gallery-grid{
+    display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
   }
@@ -820,15 +860,15 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   }
 }
 
-@media (min-width: 1024px){
+@media (min-width:1024px){
   .banner{
-    height: clamp(260px, 28vw, 420px);
+    height:clamp(260px, 28vw, 420px);
   }
 
   .banner-img{
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
   }
 }
 
