@@ -33,7 +33,7 @@
 
     <div class="actions">
       <button class="btn btn-follow" id="followBtn" onclick="window.open('https://youtube.com/@rexytmc-s3d?si=plPCwwofJlIYdYhC')">FOLLOW</button>
-      <button class="btn btn-donate" onclick="window.open('https://discord.gg/BBhKsJ6cM')">Discord</button>
+      <button class="btn btn-donate" onclick="window.open('https://discord.gg/HWdCcuW665')">Discord</button>
     </div>
   </div>
 
@@ -93,9 +93,10 @@
 
   <!-- 🔥 Modal para screenshots (descripción eliminada) -->
   <div id="screenshotModal" class="modal-overlay" onclick="closeScreenshotModal()">
-    <span class="close-modal-btn">&times;</span>
-    <img class="modal-content" id="screenshotModalImg" alt="Screenshot">
-    <!-- Se eliminó el div de descripción -->
+    <div class="screenshot-modal-wrapper" onclick="event.stopPropagation()">
+      <button class="screenshot-close-btn" onclick="closeScreenshotModal()">&times;</button>
+      <img class="modal-content" id="screenshotModalImg" alt="Screenshot">
+    </div>
   </div>
 
 <script src="js/main.js"></script>

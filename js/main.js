@@ -3,7 +3,6 @@
     // ------------------------------------------------------------------
     
     // Enlace de Donación General
-    const GENERAL_DONATE_LINK = 'https://www.patreon.com/cw/Rexytmc'; 
     const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@rexytmc-s3d?si=7E_OWq8eIAhF_K9F'; 
     const ENABLE_YOUTUBE_VIDEO = true; 
     const SHADERS_PER_PAGE = 20;
@@ -161,15 +160,6 @@ const videoList = [
 
 const screenshotImages = generateScreenshotsAuto();
     
-    // Estadísticas iniciales
-    // Estadísticas iniciales
-let profileStats = {
-    followers: 189,
-    projects: publishedShaders.length, 
-    downloads: 112414, // valor fijo
-    isFollowing: false 
-};
-    
     // HTML de la sección de Information
     const infoHTML = `
   <div class="info-accordion">
@@ -220,32 +210,24 @@ let profileStats = {
     // Referencias DOM
     const content = document.getElementById('content');
     const shaderDetailModal = document.getElementById('shaderDetailModal'); 
-    const profileStatsElement = document.getElementById('profileStats');
     const followBtn = document.getElementById('followBtn');
+    
+    document.getElementById('profileStats').textContent =
+    '560 Followers · 6 Projects · 112k Downloads';
+
+followBtn.textContent = 'YouTube';
+followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
     
     // ------------------------------------------------------------------
     // LÓGICA DE PERSISTENCIA Y ESTADÍSTICAS
     // ------------------------------------------------------------------
 
-    function loadStatsAndShaders() {      
-        updateProfileDisplay();
-        switchTab('shader');
-    }
-    
-    function updateProfileDisplay() {
-        const formatNumber = (num) => {
-            if (num >= 1000) {
-                return (num / 1000).toFixed(0).replace(/\.0$/, '') + 'k'; 
-            }
-            return num;
-        };
-        
-        profileStatsElement.textContent = 
-            `${profileStats.followers.toLocaleString()} Followers · ${profileStats.projects} Projects · ${formatNumber(profileStats.downloads)} Downloads`;
-            
-        followBtn.textContent = 'YouTube';
-followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
+    function loadStatsAndShaders() {
+    followBtn.textContent = 'YouTube';
+    followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
+    switchTab('shader');
 }
+    
     // ------------------------------------------------------------------
     // LÓGICA DE SHADERS Y DETALLE
     // ------------------------------------------------------------------
@@ -413,9 +395,7 @@ followBtn.onclick = () => openLink(YOUTUBE_CHANNEL_URL);
     function trackDownload(shaderId, downloadLink) {
     const shader = publishedShaders.find(s => s.id === shaderId);
     if (!shader || !downloadLink) return;
-    
-    shader.downloads++; 
-    updateProfileDisplay(); 
+ 
     window.open(downloadLink, '_blank');
     
     event.preventDefault(); 

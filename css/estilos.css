@@ -7,43 +7,8 @@
       background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
-    }
-
-    /* BANNER */
-    .banner {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      background-color: #111;
-      background-image: url('../assets/portada.png');
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-    }
-
-    /* BOTONES ESQUINAS (AHORA SIN FUNCIÓN, SOLO VISUALES) */
-    .corner-btn {
-      position: absolute;
-      top: 15px;
-      background: rgba(0,0,0,0.4); /* Fondo para visibilidad */
-      border: none; 
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: default; /* Cursor por defecto, ya que no hacen nada */
-      transition: 0.25s ease;
-      z-index: 50;
-    }
-
-    .corner-btn:hover {
-      background: rgba(0,0,0,0.6); 
-      box-shadow: none;
-      transform: none; /* No hay animación al pasar el mouse */
-    }
-
+    }  
+    
     .corner-left { left: 15px; }
     .corner-right { right: 15px; }
 
@@ -365,16 +330,16 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
 
     /* MODALES GENERALES */
     .modal-overlay {
-      display: none;
-      background: rgba(0,0,0,0.85);
-      position: fixed;
-      inset: 0;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      overflow-y: auto;
-      padding: 20px 0; 
-    }
+  display: none;
+  background: rgba(0,0,0,0.85);
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 200;
+  overflow-y: auto;
+  padding: 40px 0;
+}
     
     .modal-overlay > div {
       background: #111;
@@ -395,31 +360,28 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
     background-color: #0e0e0e;
     padding: 20px;
     position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
-    margin: auto;
+    margin: 40px auto;
 }
-
-/* BOTÓN DE CERRAR SIEMPRE VISIBLE */
-.close-modal-btn {
-    position: sticky;
-    top: 10px;
-    margin-left: auto;
-    display: block;
-    background: #ff007f;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    box-shadow: 0 0 8px rgba(255, 0, 127, 0.7);
-    transition: 0.2s;
-    z-index: 999;
-}
+    
+    /* BOTÓN DE CERRAR EN EL MODAL (X) */
+    .close-modal-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #ff007f;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height: 1; 
+        box-shadow: 0 0 8px rgba(255, 0, 127, 0.7);
+        transition: 0.2s;
+        z-index: 210;
+    }
 
     .close-modal-btn:hover {
         background: #ff4fd8;
@@ -628,51 +590,50 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
    Modal de Screenshots
 -------------------------------------------------- */
 #screenshotModal {
-  display: none; /* oculto por defecto */
+  display: none;
   position: fixed;
+  inset: 0;
   z-index: 9999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9); /* fondo oscuro semi-transparente */
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-#screenshotModal .close-modal-btn {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#screenshotModal .close-modal-btn:hover {
-  color: #bbb;
+#screenshotModal .screenshot-modal-wrapper {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
 }
 
 #screenshotModal .modal-content {
-  margin: auto;
   display: block;
-  max-width: 90%;
-  max-height: 80%;
-  box-shadow: 0 0 15px #000;
-  border-radius: 10px;
-  animation: zoom 0.3s ease;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
 }
 
-#screenshotModal .modal-caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
+#screenshotModal .screenshot-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+#screenshotModal .screenshot-close-btn:hover {
+  background: #ff007f;
 }
 
 @keyframes zoom {
@@ -696,11 +657,6 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   height: auto;
   display: block;
   border: none;
-}
-
-.gallery-item {
-  display: inline-block; /* 🔥 FIX para column layout */
-  width: 100%;
 }
 
 .banner {
@@ -758,112 +714,31 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   z-index: 999;
 }
 
-/* =========================================================
-   SOLO WINDOWS / PC
-   Android queda igual
-   ========================================================= */
-
-/* Android */
-@media (max-width: 1023px){
-  .shader-list{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-  }
-
-  .banner{
-    height:200px;
-    background-size:cover;
-    background-position:center center;
-  }
+/* Responsive improvements */
+.tabs{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:nowrap}
+.tab{margin:0;padding:10px 0}
+.corner-btn{width:40px;height:40px}
+.corner-btn img{width:20px;height:20px}
+.banner{background-size:cover;background-position:center center}
+.gallery-container{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.side-image,.gallery-grid{max-width:100%}
+.side-image img,.gallery-item img{width:100%;height:100%;object-fit:cover}
+@media (max-width:768px){
+  .gallery-container{grid-template-columns:1fr}
+  .tabs{gap:14px}
+  .tab{font-size:14px}
+  .corner-btn{width:36px;height:36px}
 }
 
-/* Windows / PC */
 @media (min-width: 1024px){
-
-  /* Banner corregido */
   .banner{
-    height:400px;
-    background-size:cover;
-    background-position:center center;
-    background-repeat:no-repeat;
-    overflow:hidden;
+    height: clamp(260px, 28vw, 420px);
   }
 
   .banner-img{
-    background-size:cover;
-    background-position:center center;
-    background-repeat:no-repeat;
-  }
-
-  /* Contenedor ancho */
-  .shader-list-container{
-    width:95%;
-    max-width:1350px;
-    margin:0 auto;
-    padding:15px;
-  }
-
-  /* INICIO (Shaders) en 2 columnas */
-  .shader-list{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px;
-    align-items:start;
-  }
-
-  .shader-card{
-    width:100%;
-    margin:0;
-  }
-
-  .shader-card-header{
-    height:220px;
-  }
-
-  /* Screenshots */
-  .gallery-container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-  }
-
-  .side-image,
-  .gallery-grid{
-    max-width:100%;
-  }
-
-  .side-image img,
-  .gallery-item img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-
-  .tabs{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:24px;
-    flex-wrap:nowrap;
-  }
-
-  .tab{
-    margin:0;
-    padding:10px 0;
-  }
-
-  .corner-btn{
-    width:40px;
-    height:40px;
-  }
-
-  .corner-btn img{
-    width:20px;
-    height:20px;
-  }
-
-  .profile{
-    margin-top:-65px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 }
+
