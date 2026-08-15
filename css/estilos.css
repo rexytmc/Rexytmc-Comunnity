@@ -169,20 +169,41 @@ body {
 .tab.active { border-bottom: 2px solid #ff4fd8; color: #ff4fd8; } 
 
 /* ==================================================================
-   GALERÍA Y LISTA DE SHADERS (MÓVIL POR DEFECTO: 1 COLUMNA)
+   GALERÍA GENERAL Y DE SCREENSHOTS (2 COLUMNAS POR DEFECTO)
    ================================================================== */
-.gallery-container,
-.shader-list {
-  display: grid;
-  grid-template-columns: 1fr; /* 1 Columna en móvil */
-  gap: 12px;
+.gallery-container {
+  display: flex;
+  flex-direction: column; /* 1 columna general en móvil que agrupa lateral y grid */
+  gap: 15px;
   padding: 10px;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.side-image {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* AQUÍ SE RESTAURA TUS 2 COLUMNAS PARA LOS SCREENSHOTS/GALERÍA */
+.gallery-grid {
+  column-count: 2; /* 2 columnas en móvil y en PC por defecto */
+  column-gap: 10px;
+  width: 100%;
+}
+
 .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 10px;
   border-radius: 10px;
   overflow: hidden;
   background: #111;
@@ -191,7 +212,7 @@ body {
 .gallery-item img {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -207,12 +228,21 @@ body {
 
 .gallery-item p:empty { display: none; }
 
-/* BÚSQUEDA Y CONTROLES */
+
+/* ==================================================================
+   LISTA DE SHADERS Y BÚSQUEDA
+   ================================================================== */
 .shader-list-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
+}
+
+.shader-list {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 Columna en móvil para la lista de shaders */
+  gap: 12px;
 }
 
 .search-bar {
@@ -250,7 +280,7 @@ body {
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   position: relative; 
-  padding-bottom: 15px; 
+  padding-bottom: 50px; /* Espacio para que nada choque abajo */
   cursor: pointer; 
   transition: transform 0.2s;
 }
@@ -292,7 +322,7 @@ body {
 
 .shader-author { font-size: 12px; color: #bbb; margin-top: 3px; }
 
-.shader-description-container { padding: 0 12px 10px 12px; }
+.shader-description-container { padding: 0 12px 0px 12px; }
 
 .shader-description { font-size: 13px; color: #aaa; margin: 0 0 10px 0; line-height: 1.4; }
 
@@ -300,9 +330,10 @@ body {
 
 .shader-feature { display: flex; align-items: center; gap: 4px; }
 
+/* BOTONES FLOTANTES DE LA CARD */
 .shader-actions-float {
   position: absolute;
-  bottom: 12px;
+  bottom: 12px; 
   right: 12px;
   display: flex;
   gap: 8px;
@@ -328,7 +359,7 @@ body {
 
 .shader-version-info {
   position: absolute;
-  bottom: 12px;
+  bottom: 20px; /* ¡SUBIDO MÁS ARRIBA PARA QUE CUADRE MEJOR! */
   left: 12px;
   display: flex;
   gap: 6px;
@@ -439,9 +470,32 @@ details p { padding: 12px; color: #aaa; font-size: 13px; background: #0a0a0a; ma
 .main-screen img { width: 100%; max-height: 60vh; object-fit: cover; display: block; }
 .main-screen iframe { width: 100%; aspect-ratio: 16 / 9; border: none; display: block; }
 
-.screenshots-detail { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; padding-bottom: 8px; }
-.screenshots-detail img { width: 90px; height: 60px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; flex-shrink: 0; }
-.screenshots-detail img:hover, .screenshots-detail img.active { transform: scale(1.05); border-color: #ff4fd8; }
+/* SCREENSHOTS DENTRO DEL DETALLE (Scroll horizontal como antes) */
+.screenshots-detail {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.screenshots-detail img {
+  width: 110px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.screenshots-detail img:hover,
+.screenshots-detail img.active {
+  transform: scale(1.05);
+  border-color: #ff4fd8; 
+}
 
 .info-detail { background-color: #181818; margin-top: 15px; padding: 20px; border-radius: 8px; }
 .title-detail { font-size: 24px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
@@ -474,12 +528,23 @@ details p { padding: 12px; color: #aaa; font-size: 13px; background: #0a0a0a; ma
 
 
 /* ==================================================================
-   RESPONSIVE DESIGN (PC / ESCRITORIO = 2 COLUMNAS)
+   RESPONSIVE DESIGN (PC / ESCRITORIO)
    ================================================================== */
 @media (min-width: 768px) {
   
-  /* Galería y Shaders pasan a 2 Columnas */
-  .gallery-container,
+  /* En PC la galería general pasa a mostrar la imagen lateral y el grid juntos */
+  .gallery-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  
+  .side-image {
+    flex: 0 0 auto;
+    max-width: 40%;
+    width: auto;
+  }
+  
+  /* La lista de Shaders en PC pasa a 2 Columnas */
   .shader-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
