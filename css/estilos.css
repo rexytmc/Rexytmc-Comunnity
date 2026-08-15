@@ -85,30 +85,42 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
 
 /* GALERÍA GENERAL MEJORADA Y AUTOAJUSTABLE */
 .gallery-container {
-  display: flex;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
   padding: 10px;
-  align-items: stretch; /* hace que la imagen lateral se estire según la altura de la galería */
+  align-items: stretch;
+}
+
+.side-image,
+.gallery-grid {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .side-image {
-  flex: 0 0 auto; /* tamaño según la imagen */
-  max-width: 40%; /* opcional, para que no sea demasiado grande */
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
 .side-image img {
-  height: 100%; /* ocupa toda la altura del contenedor */
-  width: auto;  /* mantiene proporción */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
 
 .gallery-grid {
-  column-count: 2; /* 2 columnas */
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   padding: 10px;
+}
+
+.gallery-item {
+  width: 100%;
 }
 
 .gallery-item {
@@ -358,34 +370,48 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
     max-width: 900px;
     width: 95%;
     background-color: #0e0e0e;
-    padding: 20px;
+    padding: 55px 20px 20px 20px;
     position: relative;
     margin: 40px auto;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
     
-    /* BOTÓN DE CERRAR EN EL MODAL (X) */
+    /* BOTÓN DE CERRAR EN LA ESQUINA DEL MODAL */
     .close-modal-btn {
         position: absolute;
-        top: 15px;
-        right: 15px;
+        top: 10px;
+        right: 10px;
+        width: 38px;
+        height: 38px;
+        padding: 0;
         background: #ff007f;
         color: #fff;
         border: none;
         border-radius: 50%;
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
+        font-size: 21px;
         font-weight: bold;
         cursor: pointer;
-        line-height: 1; 
+        line-height: 38px;
+        text-align: center;
         box-shadow: 0 0 8px rgba(255, 0, 127, 0.7);
-        transition: 0.2s;
-        z-index: 210;
+        transition: all 0.2s ease;
+        z-index: 9999;
     }
 
     .close-modal-btn:hover {
         background: #ff4fd8;
-        transform: scale(1.1);
+        transform: scale(1.08);
+        box-shadow: 0 0 12px rgba(255, 79, 216, 0.8);
+    }
+
+    .close-modal-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Evita que la X tape la imagen principal */
+    #shaderDetailModal > div {
+        padding-top: 55px;
     }
 
 
@@ -754,34 +780,17 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   background-position:center center;
 }
 
-/* WINDOWS / PC */
-.gallery-container{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  align-items:stretch;
-}
-
-.side-image,
-.gallery-grid{
-  max-width:100%;
-  min-width:0;
-}
-
-.side-image img,
-.gallery-item img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
 /* ANDROID / MOVIL */
 @media (max-width:768px){
 
   .gallery-container{
-    display:grid;
     grid-template-columns:1fr;
     gap:16px;
+  }
+
+  .gallery-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
   }
 
   .tabs{
