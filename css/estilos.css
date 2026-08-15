@@ -602,9 +602,13 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
 
 #screenshotModal .screenshot-modal-wrapper {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: auto;
-  height: auto;
+  max-width: 95vw;
+  max-height: 95vh;
+  margin: auto;
 }
 
 #screenshotModal .modal-content {
@@ -613,6 +617,8 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   max-height: 90vh;
   width: auto;
   height: auto;
+  margin: auto;
+  object-fit: contain;
   border-radius: 12px;
 }
 
@@ -714,20 +720,95 @@ box-shadow: 0 0 10px rgba(88, 101, 242, 0.75); /* Bloom estilo Discord */
   z-index: 999;
 }
 
-/* Responsive improvements */
-.tabs{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:nowrap}
-.tab{margin:0;padding:10px 0}
-.corner-btn{width:40px;height:40px}
-.corner-btn img{width:20px;height:20px}
-.banner{background-size:cover;background-position:center center}
-.gallery-container{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.side-image,.gallery-grid{max-width:100%}
-.side-image img,.gallery-item img{width:100%;height:100%;object-fit:cover}
+/* ==========================================================
+   RESPONSIVE
+   PC / WINDOWS = 2 COLUMNAS
+   ANDROID / MOVIL = 1 COLUMNA
+   ========================================================== */
+
+.tabs{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:24px;
+  flex-wrap:nowrap;
+}
+
+.tab{
+  margin:0;
+  padding:10px 0;
+}
+
+.corner-btn{
+  width:40px;
+  height:40px;
+}
+
+.corner-btn img{
+  width:20px;
+  height:20px;
+}
+
+.banner{
+  background-size:cover;
+  background-position:center center;
+}
+
+/* WINDOWS / PC */
+.gallery-container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+
+.side-image,
+.gallery-grid{
+  max-width:100%;
+  min-width:0;
+}
+
+.side-image img,
+.gallery-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ANDROID / MOVIL */
 @media (max-width:768px){
-  .gallery-container{grid-template-columns:1fr}
-  .tabs{gap:14px}
-  .tab{font-size:14px}
-  .corner-btn{width:36px;height:36px}
+
+  .gallery-container{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .tabs{
+    gap:14px;
+  }
+
+  .tab{
+    font-size:14px;
+  }
+
+  .corner-btn{
+    width:36px;
+    height:36px;
+  }
+
+  .side-image,
+  .gallery-grid{
+    width:100%;
+    max-width:100%;
+  }
+
+  .side-image img,
+  .gallery-item img{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+  }
 }
 
 @media (min-width: 1024px){
